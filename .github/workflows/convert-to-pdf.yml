@@ -1,0 +1,33 @@
+name: Markdown to PDF Workflow
+
+on:
+  push:
+    tags:
+      - '*'
+    paths:
+      - 'syllabus.md'
+      - 'schedule.md'
+
+jobs:
+  converttopdf:
+    name: Build PDF and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Convert Markdown to PDF
+        uses: baileyjm02/markdown-to-pdf@v1
+        with:
+          input_path: '.'
+          output_dir: 'pdfs'
+          # images_dir: docs/images
+          # image_import: ./images
+          # build_html: false
+
+      - name: Create GitHub Release and Upload PDFs
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./pdfs/*.pdf
+          token: ${{ secrets.GITHUB_TOKEN }}
+
