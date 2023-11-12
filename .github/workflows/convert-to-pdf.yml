@@ -13,11 +13,14 @@ jobs:
     name: Build PDF and Release
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
       - name: List files in repository
         run: ls -lR
 
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Create PDF directory
+        run: mkdir -p pdfs
 
       - name: Convert Markdown to PDF
         uses: baileyjm02/markdown-to-pdf@v1
@@ -33,4 +36,3 @@ jobs:
         with:
           files: ./pdfs/*.pdf
           token: ${{ secrets.GITHUB_TOKEN }}
-
