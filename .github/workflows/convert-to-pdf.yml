@@ -29,7 +29,7 @@ jobs:
           output_dir: pdfs
           # images_dir: docs/images
           # image_import: ./images
-          # build_html: false
+          build_html: false
 
       - name: Create GitHub Release and Upload PDFs
         uses: softprops/action-gh-release@v1
