@@ -13,6 +13,9 @@ jobs:
     name: Build PDF and Release
     runs-on: ubuntu-latest
     steps:
+      - name: List files in repository
+        run: ls -lR
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
